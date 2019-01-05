@@ -36,7 +36,8 @@ function evaluaPalabra(){
   console.log(this.value === words[rdm]) 
   if (this.value === words[rdm]){
      score = score + words[rdm].length;
-     round = +1;
+     round = round + 1;
+     document.getElementById("wordCount").innerHTML = 'Palabras:  ' + round;
      console.log(score);
      document.getElementById("scoreBoard").innerHTML = 'Score:   ' + score;
     words.splice(rdm,1);
@@ -53,7 +54,7 @@ function wordsLeft(){
   if(words.length === 0){
     //document.getElementById("printWord").innerHTML = "Buen Trabajo!";
     //document.getElementById("printWord").style.color = 'Green';
-   alert("Terminaste!!, Score: " + score + "  Precisión:  " + acc + "   Tiempo: "+ timer/60 + 's');
+   alert("Terminaste!!, Palabras: " + round + "  Precisión:  " + acc +"%   Tiempo: "+ (((timer/10).toFixed(1))/60) + 's');
    clearTimer();
   }
 }
@@ -77,7 +78,9 @@ function startTimer(){
   setInterval(function(){
     timer = timer + 1;
     xpos = xpos + 5;
+    console.log(timer);
     updateCnv();
+    chkPos();
     document.getElementById("timer").innerHTML = "Tiempo:  " + (timer/10).toFixed(1);
   },100)
 }
@@ -86,3 +89,4 @@ function startTimer(){
 function clearTimer(){
   clearInterval(timer);
 }
+

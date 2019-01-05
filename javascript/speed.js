@@ -6,7 +6,8 @@ var timer = 0;
 var rdm = 0;
 var ksc = 0;
 var dspWord = words[rdm];
-var xpos = 0;
+var xpos = 0
+var xspd = 5
 
 window.onload = function(){
   var startBtn = document.getElementById("btnStart");
@@ -24,7 +25,7 @@ function getWord(){
 rdm = Math.floor((Math.random() * words.length-1) + 1);
   console.log('Word:                         '      + words[rdm]);
 console.log('Random:     ' + rdm)
-document.getElementById("printWord").innerHTML = words[rdm];
+//document.getElementById("printWord").innerHTML = words[rdm];
 document.getElementById("cajatexto").value ="";
 focusTextBox();
 dspWord = words[rdm];
@@ -36,7 +37,8 @@ function evaluaPalabra(){
   console.log(this.value === words[rdm]) 
   if (this.value === words[rdm]){
      score = score + words[rdm].length;
-     round = +1;
+     round = round + 1;
+     document.getElementById("wordCount").innerHTML = 'Palabras:  ' + round;
      console.log(score);
      document.getElementById("scoreBoard").innerHTML = 'Score:   ' + score;
     words.splice(rdm,1);
@@ -45,33 +47,30 @@ function evaluaPalabra(){
     getWord();
     wordsLeft();
     draw();
+    chkPos();
     xpos=0;
+    xspd=5;
   } 
 }
-
-//2.1 Evalua posición. 
-// REVISAR***
-function evaluaPosicion(){
-  if (xpos >= 440){
-  alert('Perdiste!')};
-}
-
 //3.0 Esperar el final del array
 function wordsLeft(){
   if(words.length === 0){
-    document.getElementById("printWord").innerHTML = "Buen Trabajo!";
-    document.getElementById("printWord").style.color = 'Green';
-   alert("Terminaste!!, Score: " + score + "  Precisión:  " + acc + "   Tiempo: "+ timer + 's');
+    //document.getElementById("printWord").innerHTML = "Buen Trabajo!";
+    //document.getElementById("printWord").style.color = 'Green';
+   alert("Terminaste!!, Palabras: " + round + "  Precisión:  " + acc +"%   Tiempo: "+ (timer/10).toFixed(1) + 's');
    clearTimer();
   }
 }
 
 //4.0 Analizar precisión y feedback
+
 function keyCount(){
   ksc = ksc + 1
+  xspd = xspd + 1
   document.getElementById("keystrokeCount").innerHTML = "Keystrokes: "+ ksc;
   acc = (parseFloat((score/ksc)).toFixed(2))*100;
   document.getElementById("accCount").innerHTML = "Precisión: " + acc + " %";
+
 }
 
 //5.0 Mover el foco al textbox cuando start aplica
@@ -83,10 +82,11 @@ function focusTextBox(){
 function startTimer(){
   setInterval(function(){
     timer = timer + 1;
-    xpos = xpos +5;
+    xpos = xpos + xspd;
+    console.log(timer);
     updateCnv();
-    document.getElementById("timer").innerHTML = "Tiempo:  " + timer;
-    console.log('xpos = ' + xpos);
+    chkPos();
+    document.getElementById("timer").innerHTML = "Tiempo:  " + (timer/10).toFixed(1);
   },100)
 }
 
@@ -94,3 +94,11 @@ function startTimer(){
 function clearTimer(){
   clearInterval(timer);
 }
+
+//8.0 Revisar posición y kill game si aplica
+
+function chkPos(){
+  if (xpos > 450);
+  score = score - words[rdm].length;
+}
+
