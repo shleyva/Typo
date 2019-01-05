@@ -1,5 +1,5 @@
-//Script para juego de endurance
-var words = ['hola','perro','gato','estas','son','las','palabras','del','juego', 'edificio', 'jamón', 'sorpresa','comida','barista','techo','conexión','pluma','quebrado','basicamente','sacar','burro','barranca','casa','migrante','voluntario','fiesta','navidad','solución','viable','amenaza','alguien','australiano','version','indolencia','omnipresencia','telepresencia','felino','volcánico','terciario','irracional','latino','culposo','técnico','tortilla','marmoleado','televisor','automotriz','ventana','troglodíta','políglota']
+//Script para juego de coder
+var words = ['function()','addEventListener','Math.floor((Math.random())','document.getElementById','location.reload','if(array.length > 1){}','console.log(var)','styles.cc','<title>', '</title>']
 var score = 0;
 var round = 0;
 var timer = 0;
@@ -7,6 +7,7 @@ var rdm = 0;
 var ksc = 0;
 var dspWord = words[rdm];
 var xpos = 0
+var xspd = 5
 
 window.onload = function(){
   var startBtn = document.getElementById("btnStart");
@@ -47,6 +48,7 @@ function evaluaPalabra(){
     wordsLeft();
     draw();
     xpos=0;
+    xspd=5;
   } 
 }
 //3.0 Esperar el final del array
@@ -54,7 +56,7 @@ function wordsLeft(){
   if(words.length === 0){
     //document.getElementById("printWord").innerHTML = "Buen Trabajo!";
     //document.getElementById("printWord").style.color = 'Green';
-   alert("Terminaste!!, Palabras: " + round + "  Precisión:  " + acc +"%   Tiempo: "+ (((timer/10).toFixed(1))/60) + 's');
+   alert("Terminaste!!, Palabras: " + round + "  Precisión:  " + acc +"%   Tiempo: "+ (timer/10).toFixed(1) + 's');
    clearTimer();
   }
 }
@@ -63,9 +65,11 @@ function wordsLeft(){
 
 function keyCount(){
   ksc = ksc + 1
+  xspd = xspd + 1
   document.getElementById("keystrokeCount").innerHTML = "Keystrokes: "+ ksc;
   acc = (parseFloat((score/ksc)).toFixed(2))*100;
   document.getElementById("accCount").innerHTML = "Precisión: " + acc + " %";
+
 }
 
 //5.0 Mover el foco al textbox cuando start aplica
@@ -77,7 +81,7 @@ function focusTextBox(){
 function startTimer(){
   setInterval(function(){
     timer = timer + 1;
-    xpos = xpos + 5;
+    xpos = xpos + xspd;
     console.log(timer);
     updateCnv();
     document.getElementById("timer").innerHTML = "Tiempo:  " + (timer/10).toFixed(1);
@@ -88,4 +92,3 @@ function startTimer(){
 function clearTimer(){
   clearInterval(timer);
 }
-

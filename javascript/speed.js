@@ -47,7 +47,6 @@ function evaluaPalabra(){
     getWord();
     wordsLeft();
     draw();
-    chkPos();
     xpos=0;
     xspd=5;
   } 
@@ -85,7 +84,6 @@ function startTimer(){
     xpos = xpos + xspd;
     console.log(timer);
     updateCnv();
-    chkPos();
     document.getElementById("timer").innerHTML = "Tiempo:  " + (timer/10).toFixed(1);
   },100)
 }
@@ -96,9 +94,12 @@ function clearTimer(){
 }
 
 //8.0 Revisar posición y kill game si aplica
-
-function chkPos(){
-  if (xpos > 450);
-  score = score - words[rdm].length;
-}
-
+//function checkPos(){
+  //if (xpos > 450){
+    //  if (confirm('Se te fué!?. Quieres intenter de nuevo?')) {
+      // location.reload
+//}
+//else {
+  //alert("Gracias por jugar!")
+//}
+//}
