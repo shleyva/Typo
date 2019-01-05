@@ -1,5 +1,7 @@
 #printWord{
-    background-color: green; 
+    background-color: lightgreen; 
+    text-align: center;
+    font-family: "Courier New", 'Courier New', Courier, monospace;
   }
   
   #startBtn
@@ -15,3 +17,16 @@
       box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   }
   
+  #cajatexto{
+  font-family: "Courier New", Courier, monospace;
+  text-align: center;
+  display: inline;
+}
+
+  #tablero{
+      outline-style: dotted;
+  }
+
+  #dataBoard{
+text-align: center;
+  }
